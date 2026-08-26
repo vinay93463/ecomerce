@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MyStore - Admin Login</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #111827;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            min-height: 72px;
+
+            background: #111827;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow:
+                0 3px 15px
+                rgba(0,0,0,0.12);
+        }
+
+        header h1 {
+            font-size: 27px;
+        }
+
+        .back-home {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            opacity: 0.7;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        /* =========================
+           ADMIN CARD
+        ========================= */
+
+        .admin-login-card {
+            width: 100%;
+
+            max-width: 440px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0,0,0,0.09);
+        }
+
+        .login-header {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+        .admin-icon {
+            width: 68px;
+
+            height: 68px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #111827;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .login-header h2 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #991b1b;
+
+            padding: 13px 14px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            color: #111827;
+
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #111827;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(17,24,39,0.08);
+        }
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-button {
+            width: 100%;
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 3px;
+        }
+
+        .login-button:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           ADMIN INFO
+        ========================= */
+
+        .admin-info {
+            margin-top: 25px;
+
+            padding: 17px;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+        }
+
+        .admin-info-title {
+            color: #111827;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        .credential-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 7px;
+        }
+
+        .credential-row strong {
+            color: #111827;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            main {
+                padding: 35px 15px;
+            }
+
+            .admin-login-card {
+                padding: 28px 22px;
+            }
+
+            .credential-row {
+                flex-direction: column;
+
+                gap: 2px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <h1>
+        MyStore Admin
+    </h1>
+
+
+    <a
+        href="/"
+        class="back-home"
+    >
+        ← Back to Store
+    </a>
+
+</header>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<main>
+
+    <div class="admin-login-card">
+
+
+        <div class="login-header">
+
+            <div class="admin-icon">
+                🔐
+            </div>
+
+            <h2>
+                Admin Login
+            </h2>
+
+            <p>
+                Sign in to manage your MyStore products.
+            </p>
+
+        </div>
+
+
+        {% if error %}
+
+            <div class="error-message">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="/admin/login"
+        >
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter admin username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Login to Dashboard
+            </button>
+
+
+        </form>
+
+
+        <!-- ADMIN LOGIN INFO -->
+
+        <div class="admin-info">
+
+            <div class="admin-info-title">
+                Demo Admin Credentials
+            </div>
+
+
+            <div class="credential-row">
+
+                <span>
+                    Username
+                </span>
+
+                <strong>
+                    admin
+                </strong>
+
+            </div>
+
+
+            <div class="credential-row">
+
+                <span>
+                    Password
+                </span>
+
+                <strong>
+                    admin123
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 MyStore Admin. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+import sqlite3
+
+conn = sqlite3.connect("store.db")
+
+conn.execute(
+    "ALTER TABLE products ADD COLUMN category VARCHAR(100) DEFAULT 'General'"
+)
+
+conn.commit()
+conn.close()
+
+print("Category column added successfully")
+exit()

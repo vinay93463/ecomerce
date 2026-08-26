@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MyStore - Login</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #111827;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            min-height: 72px;
+
+            background: #111827;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow:
+                0 3px 15px
+                rgba(0,0,0,0.12);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+
+            align-items: center;
+
+            gap: 24px;
+
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* =========================
+           LOGIN AREA
+        ========================= */
+
+        main {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+
+            max-width: 440px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0,0,0,0.09);
+        }
+
+        .login-header {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 65px;
+
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #111827;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .login-header h2 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #991b1b;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            color: #111827;
+
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #111827;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(17,24,39,0.08);
+        }
+
+        .login-button {
+            width: 100%;
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+        .login-button:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           REGISTER
+        ========================= */
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .register-text a {
+            color: #111827;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            header {
+                min-height: auto;
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            main {
+                padding: 35px 15px;
+            }
+
+            .login-card {
+                padding: 28px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <h1>
+        MyStore
+    </h1>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/products-page">
+            Products
+        </a>
+
+        <a href="/cart-page">
+            Cart
+        </a>
+
+        <a href="/orders-page">
+            Orders
+        </a>
+
+        <a href="/register">
+            Register
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<main>
+
+    <div class="login-card">
+
+
+        <div class="login-header">
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Sign in to your MyStore account.
+            </p>
+
+        </div>
+
+
+        {% if error %}
+
+            <div class="error-message">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="/login"
+        >
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Login
+            </button>
+
+
+        </form>
+
+
+        <p class="register-text">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create an account
+            </a>
+
+        </p>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 MyStore. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MyStore - Create Account</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #111827;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            min-height: 72px;
+            background: #111827;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow:
+                0 3px 15px
+                rgba(0,0,0,0.12);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* =========================
+           REGISTER AREA
+        ========================= */
+
+        main {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 55px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 470px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0,0,0,0.09);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .register-icon {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #111827;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .register-header h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .register-header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #991b1b;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        label {
+            display: block;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            color: #111827;
+
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #111827;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(17,24,39,0.08);
+        }
+
+        .password-help {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           REGISTER BUTTON
+        ========================= */
+
+        .register-button {
+            width: 100%;
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+        .register-button:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #111827;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            header {
+                min-height: auto;
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            main {
+                padding: 35px 15px;
+            }
+
+            .register-card {
+                padding: 28px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <h1>
+        MyStore
+    </h1>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/products-page">
+            Products
+        </a>
+
+        <a href="/cart-page">
+            Cart
+        </a>
+
+        <a href="/orders-page">
+            Orders
+        </a>
+
+        <a href="/login">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     REGISTER
+========================= -->
+
+<main>
+
+    <div class="register-card">
+
+
+        <div class="register-header">
+
+            <div class="register-icon">
+                👤
+            </div>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Join MyStore and start shopping.
+            </p>
+
+        </div>
+
+
+        {% if error %}
+
+            <div class="error-message">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="/register"
+        >
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    maxlength="150"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <span class="password-help">
+                    Password must contain at least 6 characters.
+                </span>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="register-button"
+            >
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <p class="login-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login here
+            </a>
+
+        </p>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 MyStore. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
+
+
+       

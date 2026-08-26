@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MyStore - Checkout</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #111827;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            min-height: 72px;
+            background: #111827;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow:
+                0 3px 15px
+                rgba(0,0,0,0.12);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 50px 20px 80px;
+        }
+
+        .page-header h2 {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #d1d5db;
+        }
+
+        /* =========================
+           CHECKOUT
+        ========================= */
+
+        main {
+            max-width: 950px;
+            margin: -40px auto 70px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(0,0,0,0.09);
+        }
+
+        .checkout-account {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .checkout-account h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .checkout-account p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-section h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .form-section > p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+
+            padding: 15px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+
+            resize: vertical;
+
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+
+            color: #111827;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #111827;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(17,24,39,0.08);
+        }
+
+        .address-help {
+            color: #6b7280;
+            font-size: 13px;
+            margin-top: 7px;
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           ORDER BUTTON
+        ========================= */
+
+        #place-order-button {
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            background: #111827;
+            color: white;
+
+            font-size: 16px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        #place-order-button:hover {
+            opacity: 0.85;
+        }
+
+        #place-order-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #checkout-message {
+            margin-top: 25px;
+        }
+
+        .success-message {
+            background: #ecfdf5;
+
+            border: 1px solid #a7f3d0;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            color: #065f46;
+        }
+
+        .success-message h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .success-message p {
+            margin: 8px 0;
+        }
+
+        .success-message a {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 11px 17px;
+
+            background: #065f46;
+            color: white;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .success-message a:hover {
+            opacity: 0.85;
+        }
+
+        .error-message {
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            color: #991b1b;
+        }
+
+        .loading-message {
+            background: #f3f4f6;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            color: #374151;
+
+            text-align: center;
+        }
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back-links {
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .back-links a {
+            color: #374151;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .back-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+            color: white;
+
+            text-align: center;
+
+            padding: 35px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                min-height: auto;
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .page-header {
+                padding: 40px 20px 70px;
+            }
+
+            .page-header h2 {
+                font-size: 32px;
+            }
+
+            main {
+                margin-top: -30px;
+            }
+
+            .checkout-card {
+                padding: 22px;
+            }
+
+            .back-links {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <h1>
+        MyStore
+    </h1>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/products-page">
+            Products
+        </a>
+
+        <a href="/cart-page">
+            Cart
+        </a>
+
+        <a href="/orders-page">
+            Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+
+<section class="page-header">
+
+    <h2>
+        Checkout
+    </h2>
+
+    <p>
+        Complete your order securely.
+    </p>
+
+</section>
+
+
+<!-- =========================
+     CHECKOUT CONTENT
+========================= -->
+
+<main>
+
+    <div class="checkout-card">
+
+
+        <!-- ACCOUNT -->
+
+        <div class="checkout-account">
+
+            <h3>
+                Your Account
+            </h3>
+
+            <p>
+                Your name and email will be taken
+                automatically from your logged-in account.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="form-section">
+
+            <h3>
+                Delivery Information
+            </h3>
+
+            <p>
+                Enter the complete address where
+                you want your order delivered.
+            </p>
+
+
+            <form
+                id="checkout-form"
+            >
+
+                <label for="address">
+                    Delivery Address
+                </label>
+
+
+                <textarea
+                    id="address"
+                    name="address"
+                    placeholder="Example: House No. 12, MG Road, Near City Mall, Bengaluru, Karnataka - 560001"
+                    required
+                ></textarea>
+
+
+                <div class="address-help">
+
+                    Include your house/building number,
+                    street, area, city, state and PIN code.
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="place-order-button"
+                >
+                    Place Order
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="checkout-message"
+            ></div>
+
+
+            <!-- LINKS -->
+
+            <div class="back-links">
+
+                <a href="/cart-page">
+                    ← Back to Cart
+                </a>
+
+                <a href="/products-page">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 MyStore. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+// =========================================================
+// CHECKOUT
+// =========================================================
+
+document
+    .getElementById("checkout-form")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const address =
+                document
+                    .getElementById("address")
+                    .value
+                    .trim();
+
+
+            const message =
+                document.getElementById(
+                    "checkout-message"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "place-order-button"
+                );
+
+
+            // ---------------------------------------------
+            // VALIDATE ADDRESS
+            // ---------------------------------------------
+
+            if (!address) {
+
+                message.innerHTML = `
+
+                    <div class="error-message">
+
+                        Please enter your complete
+                        delivery address.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            if (address.length < 10) {
+
+                message.innerHTML = `
+
+                    <div class="error-message">
+
+                        Please enter a more complete
+                        delivery address.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // ---------------------------------------------
+            // DISABLE BUTTON
+            // ---------------------------------------------
+
+            button.disabled = true;
+
+            button.textContent =
+                "Placing Order...";
+
+
+            message.innerHTML = `
+
+                <div class="loading-message">
+
+                    Processing your order...
+
+                </div>
+
+            `;
+
+
+            try {
+
+                // -----------------------------------------
+                // FORM DATA
+                // -----------------------------------------
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "address",
+                    address
+                );
+
+
+                // -----------------------------------------
+                // SEND ORDER
+                // -----------------------------------------
+
+                const response =
+                    await fetch(
+                        "/orders",
+                        {
+                            method: "POST",
+                            body: formData,
+                            credentials: "same-origin"
+                        }
+                    );
+
+
+                // -----------------------------------------
+                // RESPONSE
+                // -----------------------------------------
+
+                let data;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    data = {
+                        message:
+                            "The server returned an invalid response."
+                    };
+
+                }
+
+
+                console.log(
+                    "ORDER STATUS:",
+                    response.status
+                );
+
+
+                console.log(
+                    "ORDER RESPONSE:",
+                    data
+                );
+
+
+                // -----------------------------------------
+                // SUCCESS
+                // -----------------------------------------
+
+                if (response.ok) {
+
+                    const orderId =
+                        data.order_id ||
+                        data.id ||
+                        "N/A";
+
+
+                    const total =
+                        Number(
+                            data.total || 0
+                        );
+
+
+                    const status =
+                        data.status ||
+                        "Pending";
+
+
+                    message.innerHTML = `
+
+                        <div class="success-message">
+
+                            <h3>
+                                ✓ Order placed successfully!
+                            </h3>
+
+
+                            <p>
+
+                                <strong>
+                                    Order ID:
+                                </strong>
+
+                                ${orderId}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Total:
+                                </strong>
+
+                                ₹${total.toFixed(2)}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Status:
+                                </strong>
+
+                                ${status}
+
+                            </p>
+
+
+                            <a href="/orders-page">
+                                View My Orders
+                            </a>
+
+                        </div>
+
+                    `;
+
+
+                    document
+                        .getElementById(
+                            "checkout-form"
+                        )
+                        .reset();
+
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "Place Order";
+
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // SERVER ERROR
+                // -----------------------------------------
+
+                const errorText =
+                    data.message ||
+                    data.detail ||
+                    "Unable to place order.";
+
+
+                message.innerHTML = `
+
+                    <div class="error-message">
+
+                        <strong>
+                            Order failed:
+                        </strong>
+
+                        ${errorText}
+
+                    </div>
+
+                `;
+
+
+            } catch (error) {
+
+                console.error(
+                    "ORDER ERROR:",
+                    error
+                );
+
+
+                message.innerHTML = `
+
+                    <div class="error-message">
+
+                        <strong>
+                            Unable to connect to the server.
+                        </strong>
+
+                        <p>
+                            Please make sure the server
+                            is running and try again.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            // ---------------------------------------------
+            // ENABLE BUTTON
+            // ---------------------------------------------
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Place Order";
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
