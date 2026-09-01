@@ -5,3 +5,4 @@ typing_extensions==4.16.0
 uvicorn==0.52.3
 itsdangerous==2.2.0
 psycopg[binary]
+fastapi==0.141.1
